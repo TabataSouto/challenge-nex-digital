@@ -12,6 +12,7 @@
     "baseUrl": "./",
   },
   "include": [
-    "src/**/*"
+    "src/**/*",
+    "src/knexfile.ts"
   ],
 }
