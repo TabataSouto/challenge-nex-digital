@@ -13,6 +13,19 @@ const transactionsServer = {
       return response.status(200).json(transactions);
     }
   },
+  getTransactionUser: async (response: Response, cpf: string) => {
+    const transactionsUser = await configKnex("transactions")
+      .where({ cpf })
+      .select();
+
+    if (!transactionsUser.length) {
+      return response
+        .status(200)
+        .json({ message: "Não existem transações para esse usuário" });
+    } else {
+      return transactionsUser;
+    }
+  },
 };
 
 export default transactionsServer;
