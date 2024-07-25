@@ -4,7 +4,7 @@ import configKnex from "../database/db";
 
 export const authUser = async (
   request: Request,
-  response: Response,
+  _response: Response,
   next: NextFunction
 ) => {
   const { email, password } = request.body;
@@ -12,17 +12,15 @@ export const authUser = async (
 
   !user
     ? next({
-        statusCode: 404,
+        status: 404,
         message: `Email não cadastrado`,
       })
     : (await bcrypt.compare(password, user.password))
     ? next()
     : next({
-        statusCode: 422,
+        status: 422,
         message: "Senha inválida",
       });
 };
 
-export const authToken = () => {
-
-}
+export const authToken = () => {};

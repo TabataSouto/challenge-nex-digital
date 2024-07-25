@@ -25,11 +25,11 @@ const authorization = (
 
   !token
     ? next({
-        statusCode: 401,
+      status: 401,
         message: "Acesso negado!",
       })
     : jwt.verify(token, secret!, (err) =>
-        err ? next({ statusCode: 400, message: "Token inválido!" }) : next()
+        err ? next({ status: 400, message: "Token inválido!" }) : next()
       );
 };
 
