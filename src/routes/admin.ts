@@ -5,6 +5,7 @@ import multer from "multer";
 // Biblioteca para ler e escrever arquivos Excel.
 import xlsx from "xlsx";
 import checkFile from "../middlewares/checkFile";
+import authorization from "../middlewares/authorization";
 
 const router = express.Router();
 // configura o armazenamento de arquivos em memória
@@ -16,6 +17,7 @@ const upload = multer({ storage });
 router.post(
   "/upload",
   upload.single("file"),
+  authorization,
   checkFile,
   (request, response, next) => adminController.upload(request, response, next)
 );
