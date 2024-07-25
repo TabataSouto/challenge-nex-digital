@@ -7,14 +7,14 @@ const validateUser = async (
   _response: Response,
   next: NextFunction
 ) => {
-  const { email } = request.body;
+  const { cpf } = request.body;
 
-  if (email) {
-    const user = await configKnex("users").where({ email }).first();
+  if (cpf) {
+    const user = await configKnex("users").where({ cpf }).first();
     user
       ? next({
           status: 409,
-          message: "Usuário já cadastrado, informe outro e-mail.",
+          message: "O cpf já está cadastrado",
         })
       : next();
   } else {
