@@ -4,27 +4,19 @@ import configKnex from "../database/db";
 
 const adminController = {
   upload: async (request: Request, response: Response, next: NextFunction) => {
-    if (!request.file) {
-      return next({
-        status: 404,
-        message: "Nenhum arquivo enviado",
-      });
-    } else {
-      try {
-        const excelJson = spreadsheetTreatment(request.file);
-        await configKnex("transactions").insert(excelJson);
-
-        return response
-          .status(201)
-          .json({ message: "Informações de transação salvas com sucesso!" });
-      } catch (error) {
-        if (error instanceof Error) {
-          return next({
-            status: 500,
-            message:
-              "Não foi possível salvar as informações. Por favor, tente novamente mais tarde.",
-          });
-        }
+    try {
+      const excelJson = spreadsheetTreatment(request.file!);
+      await configKnex("transactions").insert(excelJson);
+      return response
+        .status(201)
+        .json({ message: "Informações de transação salvas com sucesso!" });
+    } catch (error) {
+      if (error instanceof Error) {
+        return next({
+          status: 500,
+          message:
+            "Não foi possível salvar as informações. Por favor, tente novamente mais tarde.",
+        });
       }
     }
   },
