@@ -1,12 +1,10 @@
 import { NextFunction, Request, Response } from "express";
-import spreadsheetTreatment from "../helpers/spreadsheetTreatment";
-import configKnex from "../database/db";
+import adminServer from "../servers/adminServer";
 
 const adminController = {
   upload: async (request: Request, response: Response, next: NextFunction) => {
     try {
-      const excelJson = spreadsheetTreatment(request.file!);
-      await configKnex("transactions").insert(excelJson);
+      await adminServer.upload(request.file!);
       return response
         .status(201)
         .json({ message: "Informações de transação salvas com sucesso!" });

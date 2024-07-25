@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 import configKnex from "../database/db";
-import encryptedPassword from "../helpers/encryptedpassword";
+import usersServer from "../servers/usersServer";
 
 const usersController = {
   getUser: async (request: Request, response: Response, next: NextFunction) => {
@@ -23,14 +23,9 @@ const usersController = {
     response: Response,
     next: NextFunction
   ) => {
-    const { password } = request.body;
     try {
-      const newPassword = encryptedPassword(password);
-      request.body.password = newPassword;
-      await configKnex("users").insert(request.body);
-      return response
-        .status(201)
-        .json({ message: "Cadastro realizdo com sucesso!" });
+      const message = await usersServer.createUser(request.body);
+      return response.status(201).json(message);
     } catch (error) {
       if (error instanceof Error) {
         return next({
