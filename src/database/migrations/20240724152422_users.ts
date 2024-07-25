@@ -5,8 +5,10 @@ export async function up(knex: Knex): Promise<void> {
     table.increments("id").primary();
     table.string("name").notNullable();
     table.string("email").notNullable();
+    table.string("password").notNullable();
     table.string("cpf").notNullable();
-    table.timestamps(false, false);
+    table.string("role").notNullable().defaultTo("user");
+    table.timestamps(true, true);
   });
 }
 

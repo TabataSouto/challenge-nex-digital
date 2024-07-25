@@ -9,7 +9,7 @@ export async function up(knex: Knex): Promise<void> {
     table.decimal("points_value", 10, 3).notNullable();
     table.decimal("amount_value", 10, 2).notNullable();
     table.string("status").notNullable();
-    table.timestamps(false, false);
+    table.timestamps(true, true);
   });
 }
 
