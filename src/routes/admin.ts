@@ -4,7 +4,7 @@ import adminController from "../controllers/adminController";
 import multer from "multer";
 // Biblioteca para ler e escrever arquivos Excel.
 import xlsx from "xlsx";
-import checkFile from "src/middlewares/checkFile";
+import checkFile from "../middlewares/checkFile";
 
 const router = express.Router();
 // configura o armazenamento de arquivos em memória
