@@ -16,6 +16,7 @@ export interface ITransactions {
 export interface IFilters {
   status?: string;
   product?: string;
+  cpf?: string;
   startDate?: string;
   endDate?: string;
   minValue?: string;

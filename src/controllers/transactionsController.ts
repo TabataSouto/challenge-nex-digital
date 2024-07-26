@@ -9,15 +9,14 @@ const transactionsController = {
     response: Response,
     next: NextFunction
   ) => {
-    console.log(request.query)
     try {
       const transactions = await transactionsServer.getTransactions(
         request.query
       );
-      const formattedTransactions = convertValue(
+      const formatedTransactions = convertValue(
         transactions as ITransactions[]
       );
-      return response.status(200).json(formattedTransactions);
+      return response.status(200).json(formatedTransactions);
     } catch (error) {
       if (error instanceof Error) {
         return next({
