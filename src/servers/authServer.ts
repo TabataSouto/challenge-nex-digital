@@ -6,6 +6,7 @@ const authServer = {
     const user = await configKnex("users").where({ email }).first();
     const token = generateToken({
       email,
+      name: user.name,
       cpf: user.cpf,
       role: user.role,
     });
@@ -14,4 +15,3 @@ const authServer = {
 };
 
 export default authServer;
-

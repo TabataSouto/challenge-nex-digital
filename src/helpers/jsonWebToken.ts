@@ -3,6 +3,7 @@ import jwt from "jsonwebtoken";
 const secret = process.env.JWT_SECRET;
 
 export const generateToken = (body: {
+  name: string;
   email: string;
   cpf: string;
   role: string;
