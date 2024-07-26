@@ -12,3 +12,12 @@ export interface ITransactions {
   status: string;
   transaction_date: string;
 }
+
+export interface IFilters {
+  status?: string;
+  product?: string;
+  startDate?: string;
+  endDate?: string;
+  minValue?: string;
+  maxValue?: string;
+}

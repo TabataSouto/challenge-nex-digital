@@ -1,6 +1,17 @@
 import moment from "moment";
 import { ITransactions } from "src/interfaces";
 
+export const removeMaskMoney = (value: string) =>
+  value
+    .replace(/[^\d,]/g, "") // Remove todos os caracteres não numéricos e vírgulas
+    .replace(",", ".") // Substitui a vírgula por ponto
+    .replace(/\.(?=.*\.)/, ""); // Remove o ponto do milhar (caso haja mais de um ponto);
+
+// startOf('day') garante que startDate comece às 00:00:00.
+// endOf('day') garante que endDate termine às 23:59:59.
+export const formattedDateDB = (date: string) =>
+  moment(date, "DD/MM/YYYY").endOf("day").format("YYYY-MM-DD HH:mm:ss");
+
 const convertValue = (transactions: ITransactions[]) => {
   return transactions.map((transaction) => ({
     cpf: transaction.cpf,
