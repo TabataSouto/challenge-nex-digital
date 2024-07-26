@@ -10,7 +10,7 @@ const transactionsServer = {
         .status(200)
         .json({ message: "Não existem transações no momento" });
     } else {
-      return response.status(200).json(transactions);
+      return transactions;
     }
   },
   getTransactionUser: async (response: Response, cpf: string) => {

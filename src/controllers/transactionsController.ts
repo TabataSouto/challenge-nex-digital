@@ -1,5 +1,7 @@
 import { NextFunction, Request, Response } from "express";
 import transactionsServer from "../servers/transactionsServer";
+import convertValue from "../helpers/convertValue";
+import { ITransactions } from "../interfaces";
 
 const transactionsController = {
   getTransactions: async (
@@ -9,7 +11,10 @@ const transactionsController = {
   ) => {
     try {
       const transactions = await transactionsServer.getTransactions(response);
-      return response.status(200).json(transactions);
+      const formatedTransactions = convertValue(
+        transactions as ITransactions[]
+      );
+      return response.status(200).json(formatedTransactions);
     } catch (error) {
       if (error instanceof Error) {
         return next({
